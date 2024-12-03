@@ -96,6 +96,11 @@ export default defineConfig({
           name: "通知管理"
         },
         {
+          path: "/teacher/manager/surveys",
+          component: "teacher/manager/surveys",
+          name: "问卷管理"
+        },
+        {
           path: "/teacher/manager/classes",
           component: "teacher/manager/classes",
           name: "班级管理"

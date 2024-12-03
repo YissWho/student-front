@@ -6,6 +6,7 @@ import {
     NotificationOutlined,
     UserOutlined,
     GlobalOutlined,
+    SaveOutlined
 } from '@ant-design/icons';
 
 const teacherProps = {
@@ -41,6 +42,11 @@ const teacherProps = {
                         path: '/teacher/manager/notices',
                         name: '通知管理',
                         icon: <NotificationOutlined />,
+                    },
+                    {
+                        path: '/teacher/manager/surveys',
+                        name: '问卷管理',
+                        icon: <SaveOutlined />,
                     },
                 ],
             },
