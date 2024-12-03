@@ -1,0 +1,90 @@
+.homeContainer {
+    padding: 24px;
+}
+
+.welcomeCard {
+    background: linear-gradient(135deg, #e6f7ff 0%, #ffffff 100%);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.quickLinkCard {
+    height: 160px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.iconWrapper {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.linkContent {
+    h5 {
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+}
+
+.statsCard {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    :global {
+        .ant-statistic-title {
+            color: rgba(0, 0, 0, 0.45);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .ant-statistic-content {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 24px;
+            font-weight: 600;
+        }
+    }
+}
+
+.activityCard {
+    border-radius: 8px;
+    
+    .cardTitle {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+
+.progressCard {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    :global {
+        .ant-card-body {
+            padding: 16px;
+        }
+    }
+}

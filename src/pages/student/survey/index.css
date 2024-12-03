@@ -1,0 +1,51 @@
+.surveyCard {
+  margin: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+  transition: all 0.3s ease;
+}
+.surveyCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+.surveyCard :global .ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #e6f7ff 0%, #ffffff 100%);
+  border-radius: 8px 8px 0 0;
+}
+.surveyCard :global .ant-card-body {
+  padding: 24px;
+}
+.surveyCard :global .ant-timeline {
+  margin: 24px 0;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+.surveyCard :global .ant-card-inner {
+  background: #fafafa;
+}
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.surveyInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.statusSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+.tags {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

@@ -1,0 +1,19 @@
+.noticesContainer .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.noticesContainer .header h4 {
+  margin: 0;
+}
+.noticesContainer .actionButton {
+  padding: 4px 8px;
+}
+.noticesContainer .actionButton:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+.noticesContainer :global .ant-table-cell {
+  vertical-align: middle;
+}

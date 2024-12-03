@@ -1,0 +1,73 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('@/assets/bg-auth.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+.loginBox {
+  width: 400px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+@media (max-width: 576px) {
+  .loginBox {
+    width: 90%;
+    padding: 20px;
+  }
+}
+.loginHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.loginHeader .logo {
+  width: 120px;
+  height: 40px;
+  margin-bottom: 16px;
+}
+.loginHeader .title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 8px;
+}
+.loginHeader .subtitle {
+  font-size: 16px;
+  color: #666;
+}
+.loginForm :global .ant-form-item {
+  margin-bottom: 24px;
+}
+.loginForm :global .ant-form-item .ant-input-affix-wrapper {
+  transition: all 0.3s ease;
+}
+.loginForm :global .ant-form-item .ant-input-affix-wrapper:hover,
+.loginForm :global .ant-form-item .ant-input-affix-wrapper:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.loginForm :global .ant-btn {
+  transition: all 0.3s ease;
+}
+.loginForm :global .ant-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(75, 94, 228, 0.3);
+}
+.extraLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.extraLinks a {
+  color: #4B5EE4;
+  transition: all 0.3s ease;
+}
+.extraLinks a:hover {
+  color: #2138db;
+  transform: translateY(-1px);
+}

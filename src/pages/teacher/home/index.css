@@ -1,0 +1,64 @@
+.container {
+  padding: 12px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.welcomeCard {
+  background: linear-gradient(135deg, #fff 0%, #f0f5ff 100%);
+  border: none !important;
+}
+.welcomeCard .greeting {
+  margin-bottom: 12px !important;
+  background: linear-gradient(45deg, #1890ff, #722ed1);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.welcomeCard .avatar {
+  border: 4px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.welcomeCard .avatar:hover {
+  transform: scale(1.05);
+}
+.statsCard {
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+.statsCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.statsCard .statTitle {
+  color: #8c8c8c;
+  font-size: 16px;
+}
+.statsCard .statIcon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+.classesCard {
+  background: #fff;
+}
+.classesCard .classCard {
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+}
+.classesCard .classCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 8px;
+  }
+}

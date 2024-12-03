@@ -1,0 +1,27 @@
+.noticesContainer {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .actionButton {
+        padding: 4px 8px;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 4px;
+        }
+    }
+
+    :global {
+        .ant-table-cell {
+            vertical-align: middle;
+        }
+    }
+}

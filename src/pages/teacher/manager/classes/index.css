@@ -1,0 +1,58 @@
+.container {
+  padding: 24px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.tableCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.tableCard .cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.table :global .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+.table :global .ant-table-row {
+  transition: all 0.3s ease;
+}
+.table :global .ant-table-row:hover {
+  background: #f0f5ff !important;
+  transform: translateY(-1px);
+}
+.columnIcon {
+  color: #8c8c8c;
+}
+.countTag {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.formModal :global .ant-modal-content {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.formModal :global .ant-input {
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.formModal :global .ant-input:hover,
+.formModal :global .ant-input:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

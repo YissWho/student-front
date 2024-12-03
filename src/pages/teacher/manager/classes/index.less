@@ -1,0 +1,81 @@
+.container {
+    padding: 24px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.tableCard {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+// 表格样式优化
+.table {
+    :global {
+        .ant-table-thead>tr>th {
+            background: #fafafa;
+            font-weight: 600;
+        }
+
+        .ant-table-row {
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #f0f5ff !important;
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+// 列样式
+.columnIcon {
+    color: #8c8c8c;
+}
+
+.countTag {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+// 表单模态框样式
+.formModal {
+    :global {
+        .ant-modal-content {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .ant-input {
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+
+            &:hover,
+            &:focus {
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
