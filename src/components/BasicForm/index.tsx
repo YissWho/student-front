@@ -46,7 +46,6 @@ const BasicForm: React.FC<BasicFormProps> = ({
             // 其他类型字段直接返回原始值
             return { ...acc, [key]: values[key] };
         }, {});
-        console.log('formattedValues:', formattedValues);
         onSearch(formattedValues);
     };
 

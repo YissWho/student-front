@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { Avatar, message, Space, Table, TablePaginationConfig, Tag, Card, Row, Col, Statistic, Button } from 'antd';
+import { Avatar, message, Space, Table, TablePaginationConfig, Tag, Card, Row, Col, Statistic, Button, Typography, Badge } from 'antd';
 import { ProCard } from "@ant-design/pro-components";
 import { useRequest } from "ahooks";
 import { fetchClasses } from "@/service/student/classes";
@@ -8,14 +8,38 @@ import BasicForm from "@/components/BasicForm";
 import { FormField } from "@/components/BasicForm/types";
 import { ColumnType } from "antd/es/table";
 import { UserOutlined, IdcardOutlined, EnvironmentOutlined, TeamOutlined, RiseOutlined, AimOutlined, ReloadOutlined } from '@ant-design/icons';
-import { Typography, Badge } from 'antd';
+import { motion } from 'framer-motion';
 import styles from './index.less';
 
 const { Text, Title } = Typography;
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+};
+
+// itemVariants 定义子元素的动画状态
+const itemVariants = {
+    // 初始状态：透明且向下偏移20px
+    hidden: { opacity: 0, y: 20 },
+    // 显示状态：完全显示且回到原位
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5 // 动画持续0.5秒
+        }
+    }
+};
+
 const Classes: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 10;
+    const [pageSize, setPageSize] = useState(10);
     const [search, setSearch] = useState({});
 
     const { data, loading, refresh } = useRequest(
@@ -28,7 +52,7 @@ const Classes: React.FC = () => {
             });
         },
         {
-            refreshDeps: [currentPage, search],
+            refreshDeps: [currentPage, pageSize, search],
             debounceWait: 300
         }
     );
@@ -145,36 +169,72 @@ const Classes: React.FC = () => {
             })),
         },
     ];
+
+    // 计算统计数据
+    const stats = useMemo(() => {
+        if (!data?.data.results) return {
+            total: 0,
+            employed: 0,
+            graduate: 0,
+            startup: 0
+        };
+
+        const results = data.data.results;
+        return {
+            total: results.length,
+            employed: results.filter((item: any) => item.status === 0).length,
+            graduate: results.filter((item: any) => item.status === 1).length,
+            startup: results.filter((item: any) => item.status === 2).length
+        };
+    }, [data?.data.results]);
+
     return (
-        <Space direction="vertical" style={{ width: '100%' }} size="large">
-            <ProCard
-                className={styles.tableCard}
-                bordered={false}
-                hoverable
-            >
-                <Title level={4} style={{ marginBottom: 24 }}>班级成员列表</Title>
-                <div style={{ marginBottom: 16 }}>
-                    <BasicForm
-                        fields={fields}
-                        onSearch={handleSearch}
+        <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className={styles.classesContainer}
+        >
+            {/* 表格卡片 */}
+            <motion.div variants={itemVariants} style={{ marginTop: 24 }}>
+                <ProCard
+                    className={styles.tableCard}
+                    bordered={false}
+                    hoverable
+                >
+                    <div className={styles.cardHeader}>
+                        <Title level={4}>班级成员列表</Title>
+                    </div>
+
+                    <div style={{ marginBottom: 16 }}>
+                        <BasicForm
+                            fields={fields}
+                            onSearch={handleSearch}
+                        />
+                    </div>
+
+                    <Table
+                        size="small"
+                        columns={columns}
+                        dataSource={data?.data.results}
+                        loading={loading}
+                        pagination={{
+                            current: currentPage,
+                            pageSize: pageSize,
+                            total: total,
+                            showTotal: (total) => `共 ${total} 个班级成员`,
+                            position: ['bottomCenter'],
+                            showSizeChanger: true,
+                        }}
+                        onChange={(pagination) => {
+                            setCurrentPage(pagination.current || 1);
+                            setPageSize(pagination.pageSize || 10);
+                        }}
+                        className={styles.customTable}
                     />
-                </div>
-                <Table
-                    size="small"
-                    columns={columns}
-                    dataSource={data?.data.results}
-                    loading={loading}
-                    pagination={{
-                        current: currentPage,
-                        pageSize: pageSize,
-                        total: total,
-                        onChange: (page) => setCurrentPage(page),
-                        showTotal: (total) => `共 ${total} 个班级成员`
-                    }}
-                    className={styles.customTable}
-                />
-            </ProCard>
-        </Space>
+                </ProCard>
+            </motion.div>
+        </motion.div>
     );
 }
 

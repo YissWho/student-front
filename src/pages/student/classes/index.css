@@ -1,3 +1,6 @@
+.classesContainer {
+  padding: 24px;
+}
 .userInfo {
   display: flex;
   align-items: center;
@@ -45,4 +48,13 @@
 }
 .customTable :global .ant-table-pagination {
   margin-top: 24px;
+}
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.cardHeader h4 {
+  margin: 0;
 }

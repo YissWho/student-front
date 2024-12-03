@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, Typography, Modal, Form, Input, message, Tag, Space, Popconfirm } from 'antd';
+import { Button, Table, Typography, Modal, Form, Input, message, Tag, Space, Popconfirm, Tooltip } from 'antd';
 import { ProCard } from '@ant-design/pro-components';
 import { useRequest } from 'ahooks';
 import { getTeacherClasses, addTeacherClass, updateTeacherClass, deleteTeacherClass } from '@/service/teacher/mange/classes';
@@ -9,7 +9,8 @@ import {
     DeleteOutlined,
     PlusOutlined,
     CalendarOutlined,
-    SearchOutlined
+    SearchOutlined,
+    UsergroupAddOutlined
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import styles from './index.less';
@@ -27,14 +28,11 @@ const Classes: React.FC = () => {
 
     // 获取班级列表
     const { data, loading, refresh } = useRequest(
-        async () => {
-            await new Promise(resolve => setTimeout(resolve, 300));
-            return getTeacherClasses({
-                search: searchText,
-                page: currentPage,
-                page_size: pageSize
-            });
-        },
+        () => getTeacherClasses({
+            search: searchText,
+            page: currentPage,
+            page_size: pageSize
+        }),
         {
             refreshDeps: [currentPage, searchText],
             debounceWait: 300
@@ -50,6 +48,9 @@ const Classes: React.FC = () => {
                 message.success('删除成功');
                 refresh();
             }
+        },
+        onError: (error: any) => {
+            message.error(error.message);
         }
     });
 
@@ -96,38 +97,40 @@ const Classes: React.FC = () => {
             width: 150,
             render: (_: any, record: any) => (
                 <Space>
-                    <Button
-                        type="link"
-                        icon={<EditOutlined />}
-                        onClick={() => {
-                            setEditingClass(record);
-                            setModalVisible(true);
-                        }}
-                    >
-                        编辑
-                    </Button>
-                    <Popconfirm
-                        title="删除班级"
-                        description={
-                            <div>
-                                确定要删除班级 <Text strong>{record.name}</Text> 吗？
-                                <br />
-                                <Text type="secondary">此操作不可恢复</Text>
-                            </div>
-                        }
-                        onConfirm={() => deleteClass(record.id)}
-                        okText="删除"
-                        cancelText="取消"
-                        okButtonProps={{ danger: true }}
-                    >
+                    <Tooltip title="编辑班级">
                         <Button
                             type="link"
-                            danger
-                            icon={<DeleteOutlined />}
+                            icon={<EditOutlined />}
+                            onClick={() => {
+                                setEditingClass(record);
+                                setModalVisible(true);
+                            }}
                         >
-                            删除
                         </Button>
-                    </Popconfirm>
+                    </Tooltip>
+                    <Tooltip title="删除班级">
+                        <Popconfirm
+                            title="删除班级"
+                            description={
+                                <div>
+                                    确定要删除班级 <Text strong>{record.name}</Text> 吗？
+                                    <br />
+                                    <Text type="secondary">此操作不可恢复</Text>
+                                </div>
+                            }
+                            onConfirm={() => deleteClass(record.id)}
+                            okText="删除"
+                            cancelText="取消"
+                            okButtonProps={{ danger: true }}
+                        >
+                            <Button
+                                type="link"
+                                danger
+                                icon={<DeleteOutlined />}
+                            >
+                            </Button>
+                        </Popconfirm>
+                    </Tooltip>
                 </Space>
             )
         }
@@ -148,10 +151,12 @@ const Classes: React.FC = () => {
     return (
         <div className={styles.container}>
             <ProCard
-                className={styles.tableCard}
-                title={
-                    <Space className={styles.cardHeader}>
-                        <Title level={4} style={{ marginBottom: 0 }}>班级管理</Title>
+                className={styles.tableCard}>
+                <div className={styles.cardHeader}>
+                    <Title level={4}>
+                        <UsergroupAddOutlined /> 班级管理
+                    </Title>
+                    <Space size="middle">
                         <Input
                             placeholder="搜索班级名称"
                             prefix={<SearchOutlined />}
@@ -170,8 +175,8 @@ const Classes: React.FC = () => {
                             添加
                         </Button>
                     </Space>
-                }
-            >
+                </div>
+
                 <Table
                     columns={columns}
                     dataSource={classes.results}

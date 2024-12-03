@@ -9,6 +9,7 @@ import {
 } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { getChatHistory } from '@/service/student/chat';
 import { useUserStore } from '@/store/useUserStore';
@@ -26,6 +27,55 @@ import {
 import { ProCard } from '@ant-design/pro-components';
 import { useRequest } from 'ahooks';
 import { Button, type GetProp, Space, Spin } from 'antd';
+
+// 动画变体配置
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 0.5,
+            staggerChildren: 0.1
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
+
+const menuVariants = {
+    hidden: { x: -50, opacity: 0 },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            type: "spring",
+            stiffness: 100,
+            damping: 15
+        }
+    }
+};
+
+const chatVariants = {
+    hidden: { x: 50, opacity: 0 },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            type: "spring",
+            stiffness: 100,
+            damping: 15
+        }
+    }
+};
 
 const renderTitle = (icon: React.ReactElement, title: string) => (
     <Space align="start">
@@ -111,6 +161,12 @@ const useStyle = createStyles(({ token, css }) => {
             border: 1px solid #1677ff34;
             width: calc(100% - 24px);
             margin: 0 12px 24px 12px;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
         `,
     };
 });
@@ -382,45 +438,96 @@ const Chat: React.FC = () => {
     // ==================== Render =================
     return (
         <ProCard>
-            <div className={styles.layout}>
-                <div className={styles.menu}>
-                    {logoNode}
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className={styles.layout}
+            >
+                <motion.div variants={menuVariants} className={styles.menu}>
+                    <motion.div variants={itemVariants}>
+                        {logoNode}
+                    </motion.div>
                     {/* 会话列表 */}
-                    <Button
-                        type="link"
-                        onClick={createNewConversation}
-                        className={styles.addBtn}
-                        icon={<PlusOutlined />}
-                    >
-                        新建对话
-                    </Button>
-                    <Conversations
-                        className={styles.conversations}
-                        items={conversations.map(conv => ({
-                            key: conv.id,
-                            label: conv.title,
-                        }))}
-                        activeKey={currentConversationId}
-                        onActiveChange={switchConversation}
-                    />
-                </div>
-                <div className={styles.chat}>
+                    <motion.div variants={itemVariants}>
+                        <Button
+                            type="link"
+                            onClick={createNewConversation}
+                            className={styles.addBtn}
+                            icon={<PlusOutlined />}
+                        >
+                            新建对话
+                        </Button>
+                    </motion.div>
+                    <motion.div variants={itemVariants}>
+                        <Conversations
+                            className={styles.conversations}
+                            items={conversations.map(conv => ({
+                                key: conv.id,
+                                label: conv.title,
+                            }))}
+                            activeKey={currentConversationId}
+                            onActiveChange={switchConversation}
+                        />
+                    </motion.div>
+                </motion.div>
+                <motion.div variants={chatVariants} className={styles.chat}>
                     {/* 🌟 欢迎占位 */}
-                    {!items.length && placeholderNode}
-                    {/* 🌟 消息列表 */}
-                    <Bubble.List items={items} roles={roles} className={styles.messages} />
+                    <AnimatePresence mode="wait">
+                        {!items.length ? (
+                            <motion.div
+                                key="placeholder"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {placeholderNode}
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="messages"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className={styles.messages}
+                            >
+                                {/* 🌟 消息列表 */}
+                                <Bubble.List
+                                    items={items.map((item, index) => ({
+                                        ...item,
+                                        animate: {
+                                            initial: { opacity: 0, y: 20 },
+                                            animate: {
+                                                opacity: 1,
+                                                y: 0,
+                                                transition: {
+                                                    delay: index * 0.1
+                                                }
+                                            }
+                                        }
+                                    }))}
+                                    roles={roles}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                     {/* 🌟 提示词 */}
-                    <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
+                    <motion.div variants={itemVariants} transition={{ delay: 0.3 }}>
+                        <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
+                    </motion.div>
                     {/* 🌟 输入框 */}
-                    <Sender
-                        value={content}
-                        onChange={onChange}
-                        onSubmit={onSubmit}
-                        loading={loading}
-                        className={styles.sender}
-                    />
-                </div>
-            </div>
+                    <motion.div variants={itemVariants} transition={{ delay: 0.4 }}>
+                        <Sender
+                            value={content}
+                            onChange={onChange}
+                            onSubmit={onSubmit}
+                            loading={loading}
+                            className={styles.sender}
+                        />
+                    </motion.div>
+                </motion.div>
+            </motion.div>
         </ProCard>
     );
 };

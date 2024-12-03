@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Badge, Button, Card, Space, Table, Tag, Typography, message, Popconfirm } from 'antd';
+import { Avatar, Badge, Button, Card, Space, Table, Tag, Typography, message, Popconfirm, Tooltip } from 'antd';
 import { ProCard } from '@ant-design/pro-components';
 import { useRequest } from "ahooks";
 import { getTeacherStudents, deleteTeacherStudent } from "@/service/teacher/mange/students";
@@ -18,6 +18,7 @@ import styles from './index.less';
 import { ColumnType } from "antd/es/table";
 import { getTeacherClasses } from "@/service/common/common";
 import { useTeacherStore } from "@/store/useTeacherStore";
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import StudentFormModal from "./components/StudentFormModal";
 const { Text, Title } = Typography;
 
@@ -36,16 +37,14 @@ const Students: React.FC = () => {
     const [editingStudent, setEditingStudent] = useState<any>(null);
     // 获取学生列表
     const { data, loading, run, refresh } = useRequest(
-        async (params = {}) => {
-            await new Promise(resolve => setTimeout(resolve, 500));
-            return getTeacherStudents({
-                page: pagination.current,
-                page_size: pagination.pageSize,
-                ...params
-            });
-        },
+        (params: any) => getTeacherStudents({
+            page: pagination.current,
+            page_size: pagination.pageSize,
+            ...params
+        })
+        ,
         {
-            debounceWait: 500,
+            debounceWait: 300,
             refreshDeps: [pagination.current, pagination.pageSize],
             onSuccess: (res) => {
                 setPagination(prev => ({
@@ -132,39 +131,43 @@ const Students: React.FC = () => {
             width: 120,
             render: (_, record: any) => (
                 <Space>
-                    <Button
-                        type="link"
-                        onClick={() => handleEdit(record)}
-                    >
-                        编辑
-                    </Button>
-                    <Popconfirm
-                        title="删除学生"
-                        description={
-                            <div>
-                                确定要删除学生 <Text strong>{record.username}</Text> 吗？
-                                <br />
-                                <Text type="secondary">此操作不可恢复</Text>
-                            </div>
-                        }
-                        onConfirm={() => deleteStudent(record.id)}
-                        okText="删除"
-                        cancelText="取消"
-                        okButtonProps={{
-                            danger: true,
-                            size: 'small'
-                        }}
-                        cancelButtonProps={{
-                            size: 'small'
-                        }}
-                    >
+                    <Tooltip title="编辑学生">
                         <Button
                             type="link"
-                            danger
+                            icon={<EditOutlined />}
+                            onClick={() => handleEdit(record)}
                         >
-                            删除
                         </Button>
-                    </Popconfirm>
+                    </Tooltip>
+                    <Tooltip title="删除学生">
+                        <Popconfirm
+                            title="删除学生"
+                            description={
+                                <div>
+                                    确定要删除学生 <Text strong>{record.username}</Text> 吗？
+                                    <br />
+                                    <Text type="secondary">此操作不可恢复</Text>
+                                </div>
+                            }
+                            onConfirm={() => deleteStudent(record.id)}
+                            okText="删除"
+                            cancelText="取消"
+                            okButtonProps={{
+                                danger: true,
+                                size: 'small'
+                            }}
+                            cancelButtonProps={{
+                                size: 'small'
+                            }}
+                        >
+                            <Button
+                                type="link"
+                                danger
+                                icon={<DeleteOutlined />}
+                            >
+                            </Button>
+                        </Popconfirm>
+                    </Tooltip>
                 </Space>
             ),
         }

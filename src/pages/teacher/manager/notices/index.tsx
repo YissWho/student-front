@@ -176,7 +176,7 @@ const Notices: React.FC = () => {
 
     return (
         <div className={styles.noticesContainer}>
-            <ProCard>
+            <ProCard className={styles.tableCard}>
                 <div className={styles.header}>
                     <Title level={4}>
                         <NotificationOutlined /> 通知管理
@@ -200,6 +200,7 @@ const Notices: React.FC = () => {
                 </div>
 
                 <Table
+                    className={styles.table}
                     columns={columns}
                     dataSource={notices}
                     rowKey="id"

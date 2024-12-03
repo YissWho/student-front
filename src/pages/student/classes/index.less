@@ -1,3 +1,7 @@
+.classesContainer {
+  padding: 24px;
+}
+
 .userInfo {
   display: flex;
   align-items: center;
@@ -34,13 +38,13 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  
+
   :global {
     .ant-pro-card-body {
       padding: 24px;
     }
-    
-    .ant-table-thead > tr > th {
+
+    .ant-table-thead>tr>th {
       background: #fafafa;
       font-weight: 600;
     }
@@ -62,4 +66,15 @@
       margin-top: 24px;
     }
   }
-} 
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h4 {
+    margin: 0;
+  }
+}

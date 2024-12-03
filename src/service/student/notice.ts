@@ -2,12 +2,12 @@ import request from '@/utils/request';
 
 /* 获取通知列表 */
 interface FetchNoticeListParams {
-    is_read?: number;
+    is_read?: string;
     page_size?: number;
     page?: number;
 }
 export async function fetchNoticeList({
-    is_read = 0,
+    is_read = ' ',
     page = 1,
     page_size = 1000,
 }: FetchNoticeListParams) {

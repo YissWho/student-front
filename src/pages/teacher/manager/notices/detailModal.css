@@ -57,6 +57,8 @@
   transition: all 0.3s ease;
   border-radius: 4px;
   cursor: pointer;
+  /* 鼠标悬停效果 */
+  /* 头像样式，悬停放大效果 */
 }
 .studentItem:hover {
   background: #f5f5f5;
