@@ -22,7 +22,7 @@ const TeacherLogin: React.FC = () => {
     const setRole = useRoleStore((state) => state.setRole);
     const { run, loading } = useRequest(login, {
         manual: true,
-        onSuccess(res: any) {
+        onSuccess(res) {
             if (res.code === 200) {
                 if (res.data.role !== ROLE.TEACHER) {
                     message.error('无效的用户类型');
@@ -34,6 +34,7 @@ const TeacherLogin: React.FC = () => {
                 history.replace(ROLE_PATH_MAP[ROLE.TEACHER]);
                 notification.success({
                     message: '登录成功!',
+                    description: '欢迎回来！',
                 });
             }
         },
@@ -51,7 +52,7 @@ const TeacherLogin: React.FC = () => {
             <div className={styles.loginBox}>
                 <div className={styles.loginHeader}>
                     <h1 className={styles.title}>应届生去向系统</h1>
-                    <p className={styles.subtitle}>教师登录</p>
+                    <p className={styles.subtitle}>教师登录入口</p>
                 </div>
 
                 <Spin spinning={loading} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}>
@@ -69,10 +70,11 @@ const TeacherLogin: React.FC = () => {
                             ]}
                         >
                             <Input
-                                prefix={<PhoneOutlined className="site-form-item-icon" />}
-                                placeholder="手机号"
+                                prefix={<PhoneOutlined className={styles.inputIcon} />}
+                                placeholder="请输入手机号"
                                 size="large"
                                 disabled={loading}
+                                className={styles.input}
                             />
                         </Form.Item>
 
@@ -84,10 +86,11 @@ const TeacherLogin: React.FC = () => {
                             ]}
                         >
                             <Input.Password
-                                prefix={<LockOutlined className="site-form-item-icon" />}
-                                placeholder="密码"
+                                prefix={<LockOutlined className={styles.inputIcon} />}
+                                placeholder="请输入密码"
                                 size="large"
                                 disabled={loading}
+                                className={styles.input}
                             />
                         </Form.Item>
 
@@ -97,13 +100,21 @@ const TeacherLogin: React.FC = () => {
                                 htmlType="submit"
                                 block
                                 size="large"
+                                className={styles.loginButton}
+                                loading={loading}
                             >
-                                登录
+                                {loading ? '登录中...' : '登录'}
                             </Button>
                         </Form.Item>
 
                         <div className={styles.extraLinks}>
-                            <Button type="link" onClick={() => history.replace('/login')}>返回学生登录</Button>
+                            <Button
+                                type="link"
+                                onClick={() => history.replace('/login')}
+                                className={styles.linkButton}
+                            >
+                                返回学生登录
+                            </Button>
                         </div>
                     </Form>
                 </Spin>

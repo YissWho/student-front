@@ -3,8 +3,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('@/assets/bg-auth.jpg') no-repeat center center;
-    background-size: cover;
+    background: linear-gradient(135deg, #1890ff 0%, #722ed1 100%);
     padding: 24px;
 
     &::before {
@@ -14,85 +13,171 @@
         left: 0;
         right: 0;
         bottom: 0;
+        background: url('@/assets/bg-auth.jpg') no-repeat center center;
+        background-size: cover;
+        opacity: 0.2;
+        pointer-events: none;
     }
 }
 
 .registerBox {
     width: 500px;
-    padding: 20px 40px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: boxAppear 0.6s ease-out;
+
+    @keyframes boxAppear {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }
 
 .registerHeader {
     text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
+    margin-bottom: 40px;
 
-.title {
-    font-size: 28px;
-    color: #1890ff;
-    margin-bottom: 8px;
-}
+    .title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        background: linear-gradient(45deg, #1890ff, #722ed1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-.subtitle {
-    font-size: 16px;
-    color: #8c8c8c;
+    .subtitle {
+        font-size: 16px;
+        color: #666;
+    }
 }
 
 .registerForm {
     width: 100%;
     max-width: 400px;
+    margin: 0 auto;
 
     :global {
         .ant-form-item {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
 
             .ant-input-affix-wrapper {
-                border-radius: 4px;
+                height: 44px;
+                padding: 0 16px;
+                border-radius: 8px;
+                border: 1px solid #e8e8e8;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    border-color: #1890ff;
+                    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+                }
+
+                &-focused {
+                    border-color: #1890ff;
+                    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+                }
+
+                .anticon {
+                    color: #bfbfbf;
+                    transition: all 0.3s ease;
+                }
+
+                &:hover .anticon,
+                &-focused .anticon {
+                    color: #1890ff;
+                }
             }
 
             .ant-select {
                 width: 100%;
 
                 .ant-select-selector {
-                    border-radius: 4px;
+                    height: 44px !important;
+                    padding: 0 16px !important;
+                    border-radius: 8px !important;
+                    border: 1px solid #e8e8e8 !important;
+                    transition: all 0.3s ease;
+
+                    .ant-select-selection-search-input {
+                        height: 42px;
+                    }
+
+                    .ant-select-selection-item {
+                        line-height: 42px;
+                    }
+                }
+
+                &:hover .ant-select-selector {
+                    border-color: #1890ff !important;
+                    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+                }
+
+                &.ant-select-focused .ant-select-selector {
+                    border-color: #1890ff !important;
+                    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+                }
+            }
+
+            .ant-btn {
+                height: 44px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 500;
+                background: linear-gradient(45deg, #1890ff, #722ed1);
+                border: none;
+                box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4);
+                    background: linear-gradient(45deg, #40a9ff, #854eca);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
                 }
             }
         }
 
         .ant-form-item-label {
-            display: none;
-        }
+            padding-bottom: 8px;
 
-        .ant-input-affix-wrapper {
-            height: 40px;
-        }
-
-        .ant-btn {
-            border-radius: 4px;
-            height: 40px;
+            label {
+                color: #666;
+                font-size: 14px;
+                height: 22px;
+            }
         }
     }
 }
 
 .extraLinks {
     text-align: center;
-    margin-top: 16px;
-    width: 100%;
+    margin-top: 24px;
 
     :global {
         .ant-btn-link {
+            color: #666;
             font-size: 14px;
-            padding: 4px 8px;
+            padding: 4px 12px;
+            transition: all 0.3s ease;
 
             &:hover {
+                color: #1890ff;
                 background: rgba(24, 144, 255, 0.1);
+                transform: translateY(-2px);
             }
         }
     }

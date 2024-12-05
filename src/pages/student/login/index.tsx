@@ -33,6 +33,7 @@ const Login: React.FC = () => {
         history.replace(ROLE_PATH_MAP[ROLE.STUDENT]);
         notification.success({
           message: '登录成功!',
+          description: `欢迎回来！${res?.data?.user?.username}`,
         });
       }
     },
@@ -63,14 +64,15 @@ const Login: React.FC = () => {
             <Form.Item
               name="student_no"
               rules={[
-                { required: true, message: '请输入student_no' },
+                { required: true, message: '请输入学号' },
               ]}
             >
               <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="学号"
+                prefix={<UserOutlined className={styles.inputIcon} />}
+                placeholder="请输入学号"
                 size="large"
                 disabled={loading}
+                className={styles.input}
               />
             </Form.Item>
 
@@ -82,10 +84,11 @@ const Login: React.FC = () => {
               ]}
             >
               <Input.Password
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                placeholder="密码"
+                prefix={<LockOutlined className={styles.inputIcon} />}
+                placeholder="请输入密码"
                 size="large"
                 disabled={loading}
+                className={styles.input}
               />
             </Form.Item>
 
@@ -95,14 +98,28 @@ const Login: React.FC = () => {
                 htmlType="submit"
                 block
                 size="large"
+                className={styles.loginButton}
+                loading={loading}
               >
-                登录
+                {loading ? '登录中...' : '登录'}
               </Button>
             </Form.Item>
 
             <div className={styles.extraLinks}>
-              <Button type="link" onClick={() => history.replace('/student/register')}>学生注册</Button>
-              <Button type="link" onClick={() => history.replace('/teacher/login')}>教职工登录</Button>
+              <Button
+                type="link"
+                onClick={() => history.replace('/student/register')}
+                className={styles.linkButton}
+              >
+                学生注册
+              </Button>
+              <Button
+                type="link"
+                onClick={() => history.replace('/teacher/login')}
+                className={styles.linkButton}
+              >
+                教职工登录
+              </Button>
             </div>
           </Form>
         </Spin>
