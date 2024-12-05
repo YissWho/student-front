@@ -28,6 +28,11 @@ export default defineConfig({
       name: "大屏展示"
     },
     {
+      path: '/404',
+      component: 'common/404',
+      layout: false
+    },
+    {
       path: "/student",
       component: "@/layouts/StudentLayout",
       layout: false,
@@ -67,7 +72,19 @@ export default defineConfig({
           component: "student/survey",
           exact: true,
           name: "问卷调查"
-        }
+        },
+        {
+          path: "/student/404",
+          component: "common/404",
+        },
+        {
+          path: "/student/500",
+          component: "common/error",
+        },
+        {
+          path: "/student/403",
+          component: "common/permission",
+        },
       ]
     },
     {
@@ -110,7 +127,23 @@ export default defineConfig({
           component: "teacher/echarts/basic",
           name: "基础图表"
         },
+        {
+          path: "/teacher/404",
+          component: "common/404",
+        },
+        {
+          path: "/teacher/500",
+          component: "common/error",
+        },
+        {
+          path: "/teacher/403",
+          component: "common/permission",
+        },
       ]
+    },
+    {
+      path: "*",
+      redirect: "/404"
     }
   ],
   npmClient: 'yarn',

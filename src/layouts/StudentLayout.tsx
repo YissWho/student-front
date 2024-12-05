@@ -187,7 +187,7 @@ const StudentLayout: React.FC = () => {
 
     // 获取通知列表
     const { data: noticeData, refresh: refreshNotices } = useRequest(
-        () => fetchNoticeList({ is_read: 0 }),
+        () => fetchNoticeList({ is_read: '0' }),
         {
             pollingInterval: 30000,
         }
@@ -226,7 +226,7 @@ const StudentLayout: React.FC = () => {
     /* 检查角色 */
     useEffect(() => {
         if (role !== ROLE.STUDENT) {
-            history.replace('/login');
+            history.replace('/403');
         }
         fetchInfo();
     }, [role]);

@@ -223,14 +223,14 @@ const Notice: React.FC = () => {
                                 </Space>
 
                                 <Space>
-                                    {readStatus === 0 && stats.unread > 0 && (
+                                    {stats.unread > 0 && (
                                         <Button
                                             type="primary"
                                             icon={<CheckOutlined />}
                                             loading={markingMultiple}
                                             onClick={handleMarkAllAsRead}
                                         >
-                                            一键已读
+                                            一键已读(最多10条)
                                         </Button>
                                     )}
                                 </Space>

@@ -24,7 +24,7 @@ const TeacherLayout: React.FC = () => {
     // 如果不是教师角色，重定向到登录页
     useEffect(() => {
         if (role !== ROLE.TEACHER) {
-            history.replace('/login');
+            history.replace('/student/403');
         }
     }, [role]);
 
