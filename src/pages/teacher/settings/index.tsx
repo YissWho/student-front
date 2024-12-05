@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Upload, message, Space, Typography, Avatar, Skeleton, Divider } from 'antd';
+import { Form, Input, Button, Upload, message, Space, Typography, Avatar, Skeleton, Divider, Spin } from 'antd';
 import { ProCard } from '@ant-design/pro-components';
 import { useTeacherStore } from '@/store/useTeacherStore';
 import { changeTeacherInfo, getTeacherInfo } from '@/service/teacher/info';
@@ -84,91 +84,94 @@ const Settings: React.FC = () => {
 
     return (
         <div className={styles.settingsContainer}>
-            {fetchLoading ? <Skeleton active avatar paragraph={{ rows: 4 }} /> : (
-                <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                    <ProCard className={styles.profileCard}>
-                        <div className={styles.headerSection}>
-                            <Title level={2}>个人信息</Title>
-                            <Button
-                                type={editMode ? "primary" : "default"}
-                                icon={editMode ? <CheckOutlined /> : <EditOutlined />}
-                                onClick={() => {
-                                    if (editMode) {
-                                        form.submit();
-                                    } else {
-                                        setEditMode(true);
-                                    }
-                                }}
-                                loading={updating}
-                            >
-                                {editMode ? '保存' : '编辑'}
-                            </Button>
-                        </div>
-
-                        <div className={styles.avatarSection}>
-                            <div className={styles.avatarWrapper}>
-                                <Avatar
-                                    size={120}
-                                    src={previewAvatar || `http://127.0.0.1:8000${teacherInfo?.data.avatar}`}
-                                    icon={<UserOutlined />}
-                                    className={styles.avatar}
-                                />
-                                {editMode && (
-                                    <Upload
-                                        showUploadList={false}
-                                        beforeUpload={handleAvatarChange}
-                                        accept="image/*"
-                                    >
-                                        <div className={styles.avatarUpload}>
-                                            <UploadOutlined />
-                                            <span>更换头像</span>
-                                        </div>
-                                    </Upload>
-                                )}
+            {fetchLoading ?
+                <div style={{ display: 'flex', justifyContent: 'center', height: '100%', top: "100" }}>
+                    <Spin size="large" />
+                </div> : (
+                    <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                        <ProCard className={styles.profileCard}>
+                            <div className={styles.headerSection}>
+                                <Title level={2}>个人信息</Title>
+                                <Button
+                                    type={editMode ? "primary" : "default"}
+                                    icon={editMode ? <CheckOutlined /> : <EditOutlined />}
+                                    onClick={() => {
+                                        if (editMode) {
+                                            form.submit();
+                                        } else {
+                                            setEditMode(true);
+                                        }
+                                    }}
+                                    loading={updating}
+                                >
+                                    {editMode ? '保存' : '编辑'}
+                                </Button>
                             </div>
-                        </div>
 
-                        <Divider />
+                            <div className={styles.avatarSection}>
+                                <div className={styles.avatarWrapper}>
+                                    <Avatar
+                                        size={120}
+                                        src={previewAvatar || `http://127.0.0.1:8000${teacherInfo?.data.avatar}`}
+                                        icon={<UserOutlined />}
+                                        className={styles.avatar}
+                                    />
+                                    {editMode && (
+                                        <Upload
+                                            showUploadList={false}
+                                            beforeUpload={handleAvatarChange}
+                                            accept="image/*"
+                                        >
+                                            <div className={styles.avatarUpload}>
+                                                <UploadOutlined />
+                                                <span>更换头像</span>
+                                            </div>
+                                        </Upload>
+                                    )}
+                                </div>
+                            </div>
 
-                        <Form
-                            form={form}
-                            layout="vertical"
-                            onFinish={handleFinish}
-                            className={styles.form}
-                        >
-                            <Form.Item
-                                label="用户名"
-                                name="username"
-                                rules={[
-                                    { required: true, message: '请输入用户名' },
-                                    { min: 2, message: '用户名至少2个字符' }
-                                ]}
+                            <Divider />
+
+                            <Form
+                                form={form}
+                                layout="vertical"
+                                onFinish={handleFinish}
+                                className={styles.form}
                             >
-                                <Input
-                                    prefix={<UserOutlined />}
-                                    disabled={!editMode}
-                                    className={styles.input}
-                                />
-                            </Form.Item>
+                                <Form.Item
+                                    label="用户名"
+                                    name="username"
+                                    rules={[
+                                        { required: true, message: '请输入用户名' },
+                                        { min: 2, message: '用户名至少2个字符' }
+                                    ]}
+                                >
+                                    <Input
+                                        prefix={<UserOutlined />}
+                                        disabled={!editMode}
+                                        className={styles.input}
+                                    />
+                                </Form.Item>
 
-                            <Form.Item
-                                label="手机号码"
-                                name="phone"
-                                rules={[
-                                    { required: true, message: '请输入手机号码' },
-                                    { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码' }
-                                ]}
-                            >
-                                <Input
-                                    prefix={<PhoneOutlined />}
-                                    disabled={!editMode}
-                                    className={styles.input}
-                                />
-                            </Form.Item>
-                        </Form>
-                    </ProCard>
-                </Space>
-            )}
+                                <Form.Item
+                                    label="手机号码"
+                                    name="phone"
+                                    rules={[
+                                        { required: true, message: '请输入手机号码' },
+                                        { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码' }
+                                    ]}
+                                >
+                                    <Input
+                                        prefix={<PhoneOutlined />}
+                                        disabled={!editMode}
+                                        className={styles.input}
+                                    />
+                                </Form.Item>
+                            </Form>
+                        </ProCard>
+                    </Space>
+                )}
         </div>
     );
 };

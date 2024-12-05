@@ -24,3 +24,11 @@ export async function getTeachers() {
 export async function getTeacherClasses(teacher_id: string) {
     return await request.get(`/common/teacher/${teacher_id}/classes/`);
 }
+
+/**
+ * 获取验证码
+ * @returns 
+ */
+export async function getCaptcha(): Promise<any> {
+    return await request.get('/common/captcha/');
+}

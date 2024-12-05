@@ -1,6 +1,6 @@
-import React from 'react';
-import { Form, Input, Button, message, Spin, notification } from 'antd';
-import { PhoneOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button, message, Spin, notification, Col, Row } from 'antd';
+import { PhoneOutlined, LockOutlined, SafetyCertificateOutlined, LoadingOutlined } from '@ant-design/icons';
 import { history } from 'umi';
 import styles from './index.less';
 import { login } from '@/service/teacher/login';
@@ -10,18 +10,40 @@ import { setToken } from '@/utils/utils';
 import { useRoleStore } from '@/store/useRoleStore';
 import { ROLE, ROLE_PATH_MAP } from '@/constants/role';
 import { useTeacherStore } from '@/store/useTeacherStore';
+import { getCaptcha } from '@/service/common/common';
 
 interface LoginForm {
     phone: string;
     password: string;
+    captcha_key: string;
+    captcha_code: string;
 }
 
 const TeacherLogin: React.FC = () => {
     const [form] = Form.useForm();
     const setUserInfo = useTeacherStore((state) => state.setUserInfo);
     const setRole = useRoleStore((state) => state.setRole);
+    const [captchaImage, setCaptchaImage] = useState('');
+    const [captchaKey, setCaptchaKey] = useState('');
+    useEffect(() => {
+        fetchCaptcha();
+    }, []);
+    const fetchCaptcha = async () => {
+        try {
+            const res = await getCaptcha();
+            if (res.code === 200) {
+                setCaptchaImage(res.data.image);
+                setCaptchaKey(res.data.key);
+                form.setFieldsValue({ captcha_key: res.data.key });
+            }
+        } catch (error) {
+            message.error('获取验证码失败');
+        }
+    };
+
     const { run, loading } = useRequest(login, {
         manual: true,
+        debounceWait: 1000,
         onSuccess(res) {
             if (res.code === 200) {
                 if (res.data.role !== ROLE.TEACHER) {
@@ -39,11 +61,17 @@ const TeacherLogin: React.FC = () => {
             }
         },
         onError: (error: any) => {
+            fetchCaptcha();
             message.error(error.message || '登录失败，请重试');
         }
     });
 
     const onFinish = async (values: LoginForm) => {
+        if (!captchaKey) {
+            message.error('请先获取验证码');
+            return;
+        }
+        values.captcha_key = captchaKey;
         run(values);
     };
 
@@ -92,6 +120,32 @@ const TeacherLogin: React.FC = () => {
                                 disabled={loading}
                                 className={styles.input}
                             />
+                        </Form.Item>
+                        <Form.Item
+                            name="captcha_code"
+                            rules={[
+                                { required: true, message: '请输入验证码' }
+                            ]}
+                        >
+                            <Row gutter={8}>
+                                <Col span={16}>
+                                    <Input
+                                        prefix={<SafetyCertificateOutlined className={styles.inputIcon} />}
+                                        placeholder="请输入验证码"
+                                        size="large"
+                                        disabled={loading}
+                                        className={styles.input}
+                                    />
+                                </Col>
+                                <Col span={8}>
+                                    <img
+                                        src={captchaImage}
+                                        alt="验证码"
+                                        onClick={fetchCaptcha}
+                                        style={{ cursor: 'pointer', height: '40px' }}
+                                    />
+                                </Col>
+                            </Row>
                         </Form.Item>
 
                         <Form.Item>

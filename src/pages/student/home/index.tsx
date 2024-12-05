@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import styles from './index.less';
 import { useRequest } from 'ahooks';
 import { fetchStudentInfo } from '@/service/student/info';
-
+import moment from 'moment';
 const { Title, Paragraph, Text } = Typography;
 
 const quickLinks = [
@@ -52,7 +52,8 @@ const quickLinks = [
 const StudentHome: React.FC = () => {
     const [basicInfo, setBasicInfo] = useState<any>(null);
     const [statusInfo, setStatusInfo] = useState<any>(null);
-
+    /* 获取当前日期 */
+    const currentDate = moment().format('YYYY-MM-DD');
     // 获取学生信息
     const { loading } = useRequest(fetchStudentInfo, {
         onSuccess(res: any) {
@@ -227,25 +228,45 @@ const StudentHome: React.FC = () => {
                 >
                     <Row gutter={[16, 16]}>
                         {[
-                            { title: '毕业设计开题报告', status: '待开始', time: '2024-12-09' },
-                            { title: '毕业设计', status: '待开始', time: '2024-12-10' },
-                            { title: '毕业答辩', status: '待开始', time: '2025-05-05' },
-                        ].map((item, index) => (
-                            <Col span={8} key={index}>
-                                <Card size="small" hoverable className={styles.progressCard}>
-                                    <Paragraph strong>{item.title}</Paragraph>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Tag color={
-                                            item.status === '已完成' ? 'success' :
-                                                item.status === '进行中' ? 'processing' : 'default'
-                                        }>
-                                            {item.status}
-                                        </Tag>
-                                        <Text type="secondary">{item.time}</Text>
-                                    </div>
-                                </Card>
-                            </Col>
-                        ))}
+                            { title: '毕业设计开题报告', time: '2024-12-01~2024-12-09' },
+                            { title: '毕业设计', time: '2024-12-10~2025-05-05' },
+                            { title: '毕业答辩', time: '2025-05-05~2025-06-30' },
+                        ].map((item, index) => {
+                            // 按照 ~ 分割时间
+                            const [startStr, endStr] = item.time.split('~');
+                            /* 将时间字符串转换为 moment 对象 */
+                            const startDate = moment(startStr);
+                            const endDate = moment(endStr);
+                            /* 获取当前日期 */
+                            const currentDate = moment();
+
+                            // 判断状态
+                            let status = '待开始';
+                            /* 如果当前日期在开始日期和结束日期之间，则状态为进行中 */
+                            if (currentDate >= startDate && currentDate <= endDate) {
+                                status = '进行中';
+                            } else if (currentDate > endDate) {
+                                /* 如果当前日期大于结束日期，则状态为已完成 */
+                                status = '已完成';
+                            }
+
+                            return (
+                                <Col span={8} key={index}>
+                                    <Card size="small" hoverable className={styles.progressCard}>
+                                        <Paragraph strong>{item.title}</Paragraph>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <Tag color={
+                                                status === '已完成' ? 'success' :
+                                                    status === '进行中' ? 'processing' : 'default'
+                                            }>
+                                                {status}
+                                            </Tag>
+                                            <Text type="secondary">{item.time}</Text>
+                                        </div>
+                                    </Card>
+                                </Col>
+                            );
+                        })}
                     </Row>
                 </Card>
             </motion.div>
