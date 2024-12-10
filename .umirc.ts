@@ -158,5 +158,6 @@ export default defineConfig({
   antd: {
     import: false
   },
-  mfsu: false
+  mfsu: false,
+  esbuildMinifyIIFE: true,
 });
