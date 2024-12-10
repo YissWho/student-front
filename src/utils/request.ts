@@ -5,7 +5,7 @@ import { history } from 'umi';
 
 // 创建 axios 实例
 const request = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',  // API 基础路径
+    baseURL: 'https://iqekshkmfkwa.sealoshzh.site/api',  // API 基础路径
     timeout: 500000  // 请求超时时间
 })
 
