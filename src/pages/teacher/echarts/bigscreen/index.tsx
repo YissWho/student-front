@@ -60,7 +60,8 @@ const BigScreen: React.FC = () => {
 
     // 初始化左侧图表
     useEffect(() => {
-        if (!leftChartRef.current) return;
+        if (!leftChartInstance.current || !classData?.data || classData.data.length === 0)
+            return;
 
         leftChartInstance.current = echarts.init(leftChartRef.current);
 
@@ -77,7 +78,8 @@ const BigScreen: React.FC = () => {
 
     // 更新左侧图表数据
     useEffect(() => {
-        if (!leftChartInstance.current || !classData?.data) return;
+        if (!leftChartInstance.current || !classData?.data || classData.data.length === 0)
+            return;
 
         const option = {
             tooltip: {
@@ -141,7 +143,8 @@ const BigScreen: React.FC = () => {
 
     // 初始化地图
     useEffect(() => {
-        if (!mapRef.current) return;
+        if (!mapRef.current || !mapData?.data || mapData.data.length === 0)
+            return;
 
         echarts.registerMap('china', chinaJson as any);
         mapInstance.current = echarts.init(mapRef.current);
@@ -159,7 +162,9 @@ const BigScreen: React.FC = () => {
 
     // 更新地图数据
     useEffect(() => {
-        if (!mapInstance.current || !mapData?.data) return;
+        if (!mapInstance.current || !mapData?.data || mapData.data.length === 0)
+            return;
+
         const option = {
             backgroundColor: 'transparent',
             tooltip: {
@@ -228,7 +233,8 @@ const BigScreen: React.FC = () => {
 
     // 初始化右侧图表
     useEffect(() => {
-        if (!rightChartRef.current) return;
+        if (!rightChartRef.current || !provinceData?.data || provinceData.data.length === 0)
+            return;
 
         rightChartInstance.current = echarts.init(rightChartRef.current);
 
@@ -245,7 +251,8 @@ const BigScreen: React.FC = () => {
 
     // 更新右侧图表数据
     useEffect(() => {
-        if (!rightChartInstance.current || !provinceData?.data) return;
+        if (!rightChartInstance.current || !provinceData?.data || provinceData.data.length === 0)
+            return;
 
         const option = {
             tooltip: {

@@ -45,7 +45,6 @@ const Login: React.FC = () => {
         },
         onError(error: any) {
             message.error(error.message);
-            fetchCaptcha();
         }
     });
 
@@ -79,7 +78,7 @@ const Login: React.FC = () => {
         <div className={styles.loginContainer}>
             <div className={styles.loginBox}>
                 <div className={styles.loginHeader}>
-                    <h1 className={styles.title}>应届生去向系统</h1>
+                    <h1 className={styles.title}>应届生去向管理系统</h1>
                     <p className={styles.subtitle}>欢迎您的到来！</p>
                 </div>
 
@@ -156,7 +155,7 @@ const Login: React.FC = () => {
                                 className={styles.loginButton}
                                 loading={loading}
                             >
-                                {loading ? '登录中...' : '登录'}
+                                {loading ? '登录中...' : '学生登录'}
                             </Button>
                         </Form.Item>
 

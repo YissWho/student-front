@@ -1,18 +1,17 @@
-import { PageContainer, ProLayout } from '@ant-design/pro-layout';
-import { Dropdown, message, Modal, Form, Input, Button, notification, Watermark } from 'antd';
-import { UserOutlined, SettingOutlined, LockFilled, ReloadOutlined, FullscreenOutlined } from '@ant-design/icons';
-import { history, useLocation, Outlet } from 'umi';
-import React, { useState, useEffect } from 'react';
-import { useUserStore } from '@/store/useUserStore';
-import { ProCard } from '@ant-design/pro-components';
-import teacherDefaultProps from './_teacherDefaultProps';
-import { changeTeacherPassword } from '@/service/teacher/info';
-import { useRequest } from 'ahooks';
-import { isLogin, removeToken } from '@/utils/utils';
+import logo from '@/assets/logo.jpg';
 import PageLoading from '@/components/PageLoding';
-import { useRoleStore } from '@/store/useRoleStore';
 import { ROLE } from '@/constants/role';
+import { changeTeacherPassword } from '@/service/teacher/info';
+import { useRoleStore } from '@/store/useRoleStore';
 import { useTeacherStore } from '@/store/useTeacherStore';
+import { isLogin, removeToken } from '@/utils/utils';
+import { FullscreenOutlined, LockFilled, ReloadOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { PageContainer, ProLayout } from '@ant-design/pro-layout';
+import { useRequest } from 'ahooks';
+import { Button, Dropdown, Form, Input, message, Modal, notification, Watermark } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { history, Outlet, useLocation } from 'umi';
+import teacherDefaultProps from './_teacherDefaultProps';
 
 const TeacherLayout: React.FC = () => {
     const location = useLocation();
@@ -129,7 +128,7 @@ const TeacherLayout: React.FC = () => {
                 <ProLayout
                     {...teacherDefaultProps}
                     title="应届生管理系统"
-                    logo="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                    logo={<img src={logo} alt="logo" style={{ width: 32, height: 32 }} />}
                     layout="mix"
                     siderWidth={216}
                     actionsRender={(props) => {

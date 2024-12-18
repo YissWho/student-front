@@ -4,7 +4,7 @@ import { getToken } from './utils'
 import { history } from 'umi';
 
 const request = axios.create({
-    baseURL: 'https://iqekshkmfkwa.sealoshzh.site/api',
+    baseURL: 'http://127.0.0.1:8000/api',
     timeout: 500000
 })
 
@@ -40,6 +40,15 @@ request.interceptors.response.use(
     error => {
         console.error('Response error:', error)
         const { response } = error
+        /* 判断是否是token过期 */
+        if (response && response.data && response.data.code === 401 && response.statusText === 'Unauthorized') {
+            localStorage.removeItem('token')
+            sessionStorage.removeItem('token')
+            localStorage.removeItem('user')
+            sessionStorage.removeItem('user')
+            history.replace('/login')
+            return Promise.reject(new Error(response.data.message || '登录已过期'))
+        }
         if (response && response.data) {
             return Promise.reject(response.data)
         } else {

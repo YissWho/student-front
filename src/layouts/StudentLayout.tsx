@@ -1,18 +1,20 @@
-import { PageContainer, ProLayout } from '@ant-design/pro-layout';
-import { Dropdown, message, Modal, Form, Input, Button, notification, Popover, List, Avatar, Badge, Watermark } from 'antd';
-import { UserOutlined, SettingOutlined, LockFilled, NotificationOutlined, ReloadOutlined, FullscreenOutlined } from '@ant-design/icons';
-import { history, useLocation, Outlet } from 'umi';
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useUserStore } from '@/store/useUserStore';
-import _defaultProps from './_defaultProps';
-import { fetchStudentInfo, changePassword } from '@/service/student/info';
-import { useRequest } from 'ahooks';
-import { isLogin, removeToken } from '@/utils/utils';
+import logo from '@/assets/logo.jpg';
 import PageLoading from '@/components/PageLoding';
-import { fetchNoticeList, markAsRead } from '@/service/student/notice';
-import dayjs from 'dayjs';
-import { useRoleStore } from '@/store/useRoleStore';
 import { ROLE } from '@/constants/role';
+import { changePassword, fetchStudentInfo } from '@/service/student/info';
+import { fetchNoticeList, markAsRead } from '@/service/student/notice';
+import { useRoleStore } from '@/store/useRoleStore';
+import { useUserStore } from '@/store/useUserStore';
+import { isLogin, removeToken } from '@/utils/utils';
+import { FullscreenOutlined, LockFilled, NotificationOutlined, ReloadOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { PageContainer, ProLayout } from '@ant-design/pro-layout';
+import { useRequest } from 'ahooks';
+import { Avatar, Badge, Button, Dropdown, Form, Input, List, message, Modal, notification, Popover, Watermark } from 'antd';
+import dayjs from 'dayjs';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { history, Outlet, useLocation } from 'umi';
+import _defaultProps from './_defaultProps';
+
 
 // 通知列表组件
 const NoticeList = React.memo(({ notices, onViewAll, onMarkAllRead }: any) => (
@@ -312,7 +314,7 @@ const StudentLayout: React.FC = () => {
                     ]}
                     {..._defaultProps}
                     title="应届生管理系统"
-                    logo="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                    logo={<img src={logo} alt="logo" style={{ width: 32, height: 32 }} />}
                     /* 操作按钮 */
                     actionsRender={(props) => {
                         if (props.isMobile) return [];
