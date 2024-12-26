@@ -42,8 +42,8 @@ const Classes: React.FC = () => {
     const [form] = Form.useForm();
 
     const { tableProps, search, refresh } = useAntdTable(
-        (params: { current: number; pageSize: number }, formData: { modelName?: string }
-        ) => {
+        /* formData就是表单的值 */
+        (params: { current: number; pageSize: number }, formData: { search?: string; status?: number; province?: string }) => {
             return fetchClasses({
                 ...params,
                 ...formData
