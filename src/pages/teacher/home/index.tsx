@@ -11,6 +11,7 @@ import {
 import { useRequest } from "ahooks";
 import { getTeacherInfo } from "@/service/teacher/info";
 import styles from './index.less';
+import { BASE_URL } from "@/config";
 
 const { Title, Text } = Typography;
 
@@ -56,7 +57,7 @@ const TeacherHome: React.FC = () => {
                                 <Col>
                                     <Avatar
                                         size={100}
-                                        src={`http://127.0.0.1:8000${teacherInfo?.avatar}`}
+                                        src={`${BASE_URL}/${teacherInfo?.avatar}`}
                                         icon={<UserOutlined />}
                                         className={styles.avatar}
                                     />

@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { history, Outlet, useLocation } from 'umi';
 import _defaultProps from './_defaultProps';
+import { BASE_URL } from '@/config';
 
 
 // 通知列表组件
@@ -352,7 +353,7 @@ const StudentLayout: React.FC = () => {
                         ];
                     }}
                     avatarProps={{
-                        src: `http://127.0.0.1:8000/${basic_info?.avatar}`,
+                        src: `${BASE_URL}/${basic_info?.avatar}`,
                         title: basic_info?.username || '未登录',
                         size: 'small',
                         render: (_, dom) => (

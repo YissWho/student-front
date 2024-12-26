@@ -8,6 +8,7 @@ import {
     BorderBox8,
     Decoration5,
     Decoration8,
+    /* @ts-ignore */
 } from '@jiaminghi/data-view-react';
 import { useRequest } from 'ahooks';
 import * as echarts from 'echarts';

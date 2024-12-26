@@ -4,6 +4,7 @@ import { useRequest } from 'ahooks';
 import { getTeacherSurveyStudent } from '@/service/teacher/mange/survey';
 import { UserOutlined, CheckCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
+import { BASE_URL } from '@/config';
 
 const { Text, Title } = Typography;
 
@@ -105,7 +106,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
                                             <Card hoverable size="small">
                                                 <Space>
                                                     <Avatar
-                                                        src={`http://127.0.0.1:8000${student.avatar}`}
+                                                        src={`${BASE_URL}/${student.avatar}`}
                                                         icon={<UserOutlined />}
                                                     />
                                                     <Space direction="vertical" size={0}>
@@ -167,7 +168,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
                                             >
                                                 <Space>
                                                     <Avatar
-                                                        src={`http://127.0.0.1:8000${student.avatar}`}
+                                                        src={`${BASE_URL}/${student.avatar}`}
                                                         icon={<UserOutlined />}
                                                     />
                                                     <Space direction="vertical" size={0}>

@@ -12,6 +12,7 @@ import { Button, Dropdown, Form, Input, message, Modal, notification, Watermark 
 import React, { useEffect, useState } from 'react';
 import { history, Outlet, useLocation } from 'umi';
 import teacherDefaultProps from './_teacherDefaultProps';
+import { BASE_URL } from '@/config';
 
 const TeacherLayout: React.FC = () => {
     const location = useLocation();
@@ -147,7 +148,7 @@ const TeacherLayout: React.FC = () => {
                         ];
                     }}
                     avatarProps={{
-                        src: `http://127.0.0.1:8000/${userInfo?.avatar}`,
+                        src: `${BASE_URL}/${userInfo?.avatar}`,
                         title: userInfo?.username || '未登录',
                         size: 'small',
                         render: (_, dom) => (

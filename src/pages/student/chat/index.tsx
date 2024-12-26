@@ -27,6 +27,7 @@ import {
 import { ProCard } from '@ant-design/pro-components';
 import { useRequest } from 'ahooks';
 import { Button, type GetProp, Space, Spin } from 'antd';
+import { BASE_URL } from '@/config';
 
 // 动画变体配置
 const containerVariants = {
@@ -268,7 +269,7 @@ const Chat: React.FC = () => {
             variant: 'shadow',
             avatar: {
                 size: 40,
-                src: `http://127.0.0.1:8000/${basic_info?.avatar}`,
+                src: `${BASE_URL}/${basic_info?.avatar}`,
             },
         },
     };

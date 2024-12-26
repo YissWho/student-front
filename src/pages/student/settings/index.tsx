@@ -14,6 +14,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { employmentStatusMap, provinceMap } from "@/utils/utils";
 import { motion } from 'framer-motion';
 import styles from './index.less';
+import { BASE_URL } from '@/config';
 
 const { Option } = Select;
 const { Title, Text } = Typography;
@@ -27,11 +28,7 @@ const Settings: React.FC = () => {
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
     // 获取学生信息
-    const { data: studentInfo, loading: fetchLoading, run: fetchStudentInfo } = useRequest(
-        async () => {
-            await new Promise(resolve => setTimeout(resolve, 500));
-            return getStudentInfo();
-        },
+    const { data: studentInfo, loading: fetchLoading, run: fetchStudentInfo } = useRequest(getStudentInfo,
         {
             onSuccess: (res: any) => {
                 const info = res.data;
@@ -182,7 +179,7 @@ const Settings: React.FC = () => {
                                 <Avatar
                                     size={120}
                                     src={avatarFile ? URL.createObjectURL(avatarFile) :
-                                        studentInfo?.data.avatar ? `http://127.0.0.1:8000${studentInfo.data.avatar}` : undefined}
+                                        studentInfo?.data.avatar ? `${BASE_URL}/${studentInfo.data.avatar}` : undefined}
                                     icon={<UserOutlined />}
                                 />
                                 <Title level={4} style={{ marginTop: 16, marginBottom: 8 }}>

@@ -2,10 +2,11 @@ import axios from 'axios'
 import { message } from 'antd'
 import { getToken } from './utils'
 import { history } from 'umi';
+import { BASE_URL, CONFIG } from '@/config'
 
 const request = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
-    timeout: 500000
+    baseURL: `${BASE_URL}/api`,
+    timeout: CONFIG.TIMEOUT
 })
 
 request.interceptors.request.use(

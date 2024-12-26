@@ -150,6 +150,7 @@ export default defineConfig({
     }
   ],
   npmClient: 'yarn',
+  esbuildMinifyIIFE: true,
   alias: {
     '@': '/src',
     '@assets': '/src/assets'

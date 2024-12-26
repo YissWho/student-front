@@ -4,6 +4,7 @@ import { useRequest } from 'ahooks';
 import { getUnreadNoticeCount, getReadNoticeCount } from '@/service/teacher/mange/notice';
 import { UserOutlined, CheckCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import styles from './detailModal.less';
+import { BASE_URL } from '@/config';
 
 const { Text, Paragraph, Title } = Typography;
 
@@ -88,7 +89,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ open, onCancel, record
                                     {row.map((item, index) => (
                                         <div key={index} className={styles.studentItem}>
                                             <Avatar
-                                                src={`http://127.0.0.1:8000/${item.avatar}`}
+                                                src={`${BASE_URL}/${item.avatar}`}
                                                 icon={<UserOutlined />}
                                                 className={styles.avatar}
                                             />
@@ -136,7 +137,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ open, onCancel, record
                                     {row.map((item, index) => (
                                         <div key={index} className={styles.studentItem}>
                                             <Avatar
-                                                src={`http://127.0.0.1:8000/${item.avatar}`}
+                                                src={`${BASE_URL}/${item.avatar}`}
                                                 icon={<UserOutlined />}
                                                 className={styles.avatar}
                                             />

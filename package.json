@@ -6,7 +6,8 @@
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@ant-design/charts": "^2.2.3",

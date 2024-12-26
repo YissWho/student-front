@@ -16,6 +16,7 @@ import styles from './index.less';
 import { useRequest } from 'ahooks';
 import { fetchStudentInfo } from '@/service/student/info';
 import moment from 'moment';
+import { BASE_URL } from '@/config';
 const { Title, Paragraph, Text } = Typography;
 
 const quickLinks = [
@@ -124,7 +125,7 @@ const StudentHome: React.FC = () => {
                         <Col>
                             <Avatar
                                 size={64}
-                                src={`http://127.0.0.1:8000${basicInfo?.avatar}`}
+                                src={`${BASE_URL}/${basicInfo?.avatar}`}
                                 icon={<UserOutlined />}
                             />
                         </Col>

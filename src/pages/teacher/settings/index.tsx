@@ -6,6 +6,7 @@ import { changeTeacherInfo, getTeacherInfo } from '@/service/teacher/info';
 import { UploadOutlined, UserOutlined, PhoneOutlined, EditOutlined, CheckOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import styles from './index.less';
+import { BASE_URL } from "@/config";
 
 const { Title, Text } = Typography;
 
@@ -112,7 +113,7 @@ const Settings: React.FC = () => {
                                 <div className={styles.avatarWrapper}>
                                     <Avatar
                                         size={120}
-                                        src={previewAvatar || `http://127.0.0.1:8000${teacherInfo?.data.avatar}`}
+                                        src={previewAvatar || `${BASE_URL}/${teacherInfo?.data.avatar}`}
                                         icon={<UserOutlined />}
                                         className={styles.avatar}
                                     />

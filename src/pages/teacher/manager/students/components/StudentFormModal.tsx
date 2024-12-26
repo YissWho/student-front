@@ -4,6 +4,7 @@ import { UserOutlined, IdcardOutlined, PhoneOutlined, UploadOutlined } from '@an
 import { useRequest } from 'ahooks';
 import { addTeacherStudent, updateTeacherStudent } from '@/service/teacher/mange/students';
 import styles from './StudentFormModal.less';
+import { BASE_URL } from '@/config';
 
 interface StudentFormModalProps {
     visible: boolean;
@@ -34,7 +35,7 @@ const StudentFormModal: React.FC<StudentFormModalProps> = ({
                 phone: editData.phone,
                 classs: editData.classs,
             });
-            setPreviewUrl(`http://127.0.0.1:8000${editData.avatar}`);
+            setPreviewUrl(`${BASE_URL}/${editData.avatar}`);
         } else {
             form.resetFields();
             setPreviewUrl('');

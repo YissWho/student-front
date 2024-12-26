@@ -20,6 +20,7 @@ import { getTeacherClasses } from "@/service/common/common";
 import { useTeacherStore } from "@/store/useTeacherStore";
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import StudentFormModal from "./components/StudentFormModal";
+import { BASE_URL } from "@/config";
 const { Text, Title } = Typography;
 
 const Students: React.FC = () => {
@@ -66,7 +67,7 @@ const Students: React.FC = () => {
                 <div className={styles.userInfo}>
                     <Avatar
                         size={48}
-                        src={`http://127.0.0.1:8000${record.avatar}`}
+                        src={`${BASE_URL}/${record.avatar}`}
                         icon={<UserOutlined />}
                         className={styles.avatar}
                     />
