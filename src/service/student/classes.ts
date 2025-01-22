@@ -7,6 +7,8 @@ interface FetchClassesParams {
     status?: number;
     province?: string;
 }
+
+/* 获取班级列表 */
 export async function fetchClasses(params: FetchClassesParams) {
     const { current, pageSize, ...formParams } = params;
     const requestParams = {

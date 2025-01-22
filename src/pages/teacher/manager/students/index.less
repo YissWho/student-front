@@ -1,144 +1,144 @@
 .container {
-    padding: 24px;
-    animation: fadeIn 0.5s ease-in-out;
+  padding: 24px;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 // 统计卡片样式
 .statsRow {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .statsCard {
-    flex: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fff 0%, #f0f5ff 100%);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .statsIcon {
+    font-size: 48px;
+    color: #1890ff;
+    margin-right: 20px;
+    background: rgba(24, 144, 255, 0.1);
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .statsContent {
     display: flex;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #fff 0%, #f0f5ff 100%);
-    transition: all 0.3s ease;
-    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
 
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    h3 {
+      margin: 0;
+      background: linear-gradient(45deg, #1890ff, #722ed1);
+      -webkit-background-clip: text;
+      color: transparent;
     }
-
-    .statsIcon {
-        font-size: 48px;
-        color: #1890ff;
-        margin-right: 20px;
-        background: rgba(24, 144, 255, 0.1);
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .statsContent {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-
-        h3 {
-            margin: 0;
-            background: linear-gradient(45deg, #1890ff, #722ed1);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-    }
+  }
 }
 
 // 表格卡片样式
 .tableCard {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
-    .searchForm {
-        margin-bottom: 24px;
-    }
+  .searchForm {
+    margin-bottom: 24px;
+  }
 }
 
 // 用户信息单元格样式
 .userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .avatar {
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .userMeta {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 4px;
 
-    .avatar {
-        border: 2px solid #fff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-
-        &:hover {
-            transform: scale(1.1);
-        }
+    .userExtra {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #8c8c8c;
     }
-
-    .userMeta {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-
-        .userExtra {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #8c8c8c;
-        }
-    }
+  }
 }
 
 // 表格列图标样式
 .columnIcon {
-    color: #8c8c8c;
+  color: #8c8c8c;
 }
 
 // 状态标签样式
 .statusTag {
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
 }
 
 // 表格样式优化
 .table {
-    :global {
-        .ant-table-thead>tr>th {
-            background: #fafafa;
-            font-weight: 600;
-        }
-
-        .ant-table-row {
-            transition: all 0.3s ease;
-
-            &:hover {
-                background: #f0f5ff !important;
-                transform: translateY(-1px);
-            }
-        }
+  :global {
+    .ant-table-thead>tr>th {
+      background: #fafafa;
+      font-weight: 600;
     }
+
+    .ant-table-row {
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f0f5ff !important;
+        transform: translateY(-1px);
+      }
+    }
+  }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 // 响应式设计
 @media screen and (max-width: 768px) {
-    .container {
-        padding: 12px;
-    }
+  .container {
+    padding: 12px;
+  }
 
-    .statsRow {
-        flex-direction: column;
-    }
+  .statsRow {
+    flex-direction: column;
+  }
 }
