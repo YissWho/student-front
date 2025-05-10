@@ -126,6 +126,7 @@ const PasswordModal = React.memo(
           form.resetFields()
         }}
         footer={null}
+        centered
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item

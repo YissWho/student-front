@@ -60,6 +60,7 @@ export const ClassFormModal: React.FC<ClassFormModalProps> = ({
       onOk={() => form.submit()}
       confirmLoading={loading}
       className={styles.formModal}
+      centered
     >
       <Form form={form} layout="vertical" onFinish={run}>
         <Form.Item

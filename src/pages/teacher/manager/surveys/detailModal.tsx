@@ -235,7 +235,7 @@ const DetailModal: React.FC<DetailModalProps> = ({
 
   return (
     <Modal
-      style={{ top: 40 }}
+      centered
       title={
         <Space direction="vertical" style={{ width: "100%" }}>
           <Title level={4}>{survey.title}</Title>

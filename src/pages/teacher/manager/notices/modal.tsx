@@ -63,6 +63,7 @@ export const NoticeModal: React.FC<NoticeModalProps> = ({
         onCancel={handleCancel}
         title={isEdit ? "编辑通知" : "发布通知"}
         onOk={handleOk}
+        centered
       >
         <Form form={form}>
           <Form.Item

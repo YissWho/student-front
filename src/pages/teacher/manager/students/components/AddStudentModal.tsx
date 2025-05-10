@@ -207,6 +207,7 @@ const AddStudentModal: React.FC<AddStudentModalProps> = ({
       width={600}
       className={styles.modal}
       footer={null}
+      centered
     >
       <Steps current={currentStep} items={steps} className={styles.steps} />
       <Form form={form} layout="vertical" className={styles.form}>

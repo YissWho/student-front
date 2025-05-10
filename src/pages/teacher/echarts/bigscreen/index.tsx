@@ -38,6 +38,15 @@ const BigScreen: React.FC = () => {
   const { data: ratioData } = useRequest(fetchEmploymentAndEnrollmentRatio)
   const { data: provinceData } = useRequest(fetchProvinceWordCloud)
 
+  // 添加调试输出
+  useEffect(() => {
+    console.log("MapData:", mapData)
+    console.log("ClassData:", classData)
+    console.log("EmploymentData:", employmentData)
+    console.log("RatioData:", ratioData)
+    console.log("ProvinceData:", provinceData)
+  }, [mapData, classData, employmentData, ratioData, provinceData])
+
   // 更新时间
   useEffect(() => {
     const updateTime = () => {
@@ -61,14 +70,14 @@ const BigScreen: React.FC = () => {
 
   // 初始化左侧图表
   useEffect(() => {
-    if (
-      !leftChartInstance.current ||
-      !classData?.data ||
-      classData.data.length === 0
-    )
+    if (!leftChartRef.current) {
+      console.log("左侧图表容器不存在")
       return
+    }
 
+    console.log("初始化左侧图表")
     leftChartInstance.current = echarts.init(leftChartRef.current)
+    console.log("左侧图表实例:", leftChartInstance.current)
 
     const handleResize = () => {
       leftChartInstance.current?.resize()
@@ -83,12 +92,17 @@ const BigScreen: React.FC = () => {
 
   // 更新左侧图表数据
   useEffect(() => {
-    if (
-      !leftChartInstance.current ||
-      !classData?.data ||
-      classData.data.length === 0
-    )
+    if (!leftChartInstance.current) {
+      console.log("左侧图表实例不存在")
       return
+    }
+
+    if (!classData?.data || classData.data.length === 0) {
+      console.log("左侧图表数据不存在")
+      return
+    }
+
+    console.log("更新左侧图表数据:", classData)
 
     const option = {
       tooltip: {
@@ -152,10 +166,15 @@ const BigScreen: React.FC = () => {
 
   // 初始化地图
   useEffect(() => {
-    if (!mapRef.current || !mapData?.data || mapData.data.length === 0) return
+    if (!mapRef.current) {
+      console.log("地图容器不存在")
+      return
+    }
 
+    console.log("初始化地图")
     echarts.registerMap("china", chinaJson as any)
     mapInstance.current = echarts.init(mapRef.current)
+    console.log("地图实例:", mapInstance.current)
 
     const handleResize = () => {
       mapInstance.current?.resize()
@@ -170,8 +189,17 @@ const BigScreen: React.FC = () => {
 
   // 更新地图数据
   useEffect(() => {
-    if (!mapInstance.current || !mapData?.data || mapData.data.length === 0)
+    if (!mapInstance.current) {
+      console.log("地图实例不存在")
       return
+    }
+
+    if (!mapData?.data || mapData.data.length === 0) {
+      console.log("地图数据不存在")
+      return
+    }
+
+    console.log("更新地图数据:", mapData)
 
     const option = {
       backgroundColor: "transparent",
@@ -242,14 +270,14 @@ const BigScreen: React.FC = () => {
 
   // 初始化右侧图表
   useEffect(() => {
-    if (
-      !rightChartRef.current ||
-      !provinceData?.data ||
-      provinceData.data.length === 0
-    )
+    if (!rightChartRef.current) {
+      console.log("右侧图表容器不存在")
       return
+    }
 
+    console.log("初始化右侧图表")
     rightChartInstance.current = echarts.init(rightChartRef.current)
+    console.log("右侧图表实例:", rightChartInstance.current)
 
     const handleResize = () => {
       rightChartInstance.current?.resize()
@@ -264,12 +292,17 @@ const BigScreen: React.FC = () => {
 
   // 更新右侧图表数据
   useEffect(() => {
-    if (
-      !rightChartInstance.current ||
-      !provinceData?.data ||
-      provinceData.data.length === 0
-    )
+    if (!rightChartInstance.current) {
+      console.log("右侧图表实例不存在")
       return
+    }
+
+    if (!provinceData?.data || provinceData.data.length === 0) {
+      console.log("右侧图表数据不存在")
+      return
+    }
+
+    console.log("更新右侧图表数据:", provinceData)
 
     const option = {
       tooltip: {

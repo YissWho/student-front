@@ -210,6 +210,7 @@ const TeacherLayout: React.FC = () => {
           passwordForm.resetFields()
         }}
         footer={null}
+        centered
       >
         <Form
           form={passwordForm}

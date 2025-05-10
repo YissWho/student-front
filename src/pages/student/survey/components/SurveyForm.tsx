@@ -68,6 +68,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({
       onOk={form.submit}
       confirmLoading={submitting}
       width={600}
+      centered
     >
       <Form
         form={form}

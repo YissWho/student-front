@@ -117,13 +117,13 @@ const StudentFormModal: React.FC<StudentFormModalProps> = ({
   return (
     <Modal
       title={isEdit ? "编辑学生" : "添加学生"}
-      style={{ top: 20 }}
       open={visible}
       onCancel={handleCancel}
       onOk={() => form.submit()}
       confirmLoading={loading}
       width={520}
       className={styles.modal}
+      centered
     >
       <Form
         form={form}

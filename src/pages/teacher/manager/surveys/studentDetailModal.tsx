@@ -1,41 +1,41 @@
-import React from "react"
-import { Modal, Descriptions, Typography, Spin, Empty } from "antd"
-import { useRequest } from "ahooks"
-import { getTeacherSurveyStudentDetail } from "@/service/teacher/mange/survey"
-import dayjs from "dayjs"
+import React from "react";
+import { Modal, Descriptions, Typography, Spin, Empty } from "antd";
+import { useRequest } from "ahooks";
+import { getTeacherSurveyStudentDetail } from "@/service/teacher/mange/survey";
+import dayjs from "dayjs";
 
-const { Title } = Typography
+const { Title } = Typography;
 
 interface StudentDetailModalProps {
-  visible: boolean
-  surveyId: number
-  student_no: number
-  onClose: () => void
+  visible: boolean;
+  surveyId: number;
+  student_no: number;
+  onClose: () => void;
 }
 
 interface SurveyResponse {
-  id: number
-  student_name: string
-  name: string
-  student_no: string
-  class_name: string
-  phone: string
-  future_plan: number
-  future_plan_display: string
-  employment_type: number
-  employment_type_display: string
-  city_preference: number
-  city_preference_display: string
-  expected_salary: number
-  expected_salary_display: string
-  job_market_view: number
-  job_market_view_display: string
-  study_type: number | null
-  study_type_display: string | null
-  target_school: string | null
-  study_plan_status: number | null
-  study_plan_status_display: string | null
-  submitted_at: string
+  id: number;
+  student_name: string;
+  name: string;
+  student_no: string;
+  class_name: string;
+  phone: string;
+  future_plan: number;
+  future_plan_display: string;
+  employment_type: number;
+  employment_type_display: string;
+  city_preference: number;
+  city_preference_display: string;
+  expected_salary: number;
+  expected_salary_display: string;
+  job_market_view: number;
+  job_market_view_display: string;
+  study_type: number | null;
+  study_type_display: string | null;
+  target_school: string | null;
+  study_plan_status: number | null;
+  study_plan_status_display: string | null;
+  submitted_at: string;
 }
 
 const StudentDetailModal: React.FC<StudentDetailModalProps> = ({
@@ -51,9 +51,9 @@ const StudentDetailModal: React.FC<StudentDetailModalProps> = ({
       ready: visible && surveyId > 0 && student_no > 0,
       refreshDeps: [surveyId, student_no],
     }
-  )
+  );
 
-  const response: SurveyResponse = data?.data?.response
+  const response: SurveyResponse = data?.data?.response;
 
   if (!response) {
     return (
@@ -63,15 +63,16 @@ const StudentDetailModal: React.FC<StudentDetailModalProps> = ({
         onCancel={onClose}
         footer={null}
         width={600}
+        centered
       >
         <Empty description="暂无数据" />
       </Modal>
-    )
+    );
   }
 
   return (
     <Modal
-      style={{ top: 30 }}
+      centered
       title={<Title level={4}>{response.student_name} 的问卷详情</Title>}
       open={visible}
       onCancel={onClose}
@@ -132,7 +133,7 @@ const StudentDetailModal: React.FC<StudentDetailModalProps> = ({
         </Descriptions>
       )}
     </Modal>
-  )
-}
+  );
+};
 
-export default StudentDetailModal
+export default StudentDetailModal;

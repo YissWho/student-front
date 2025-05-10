@@ -186,12 +186,12 @@ export const DetailModal: React.FC<DetailModalProps> = ({
   return (
     <Modal
       open={open}
-      style={{ top: 30 }}
       onCancel={onCancel}
       title="通知详情"
       width={680}
       footer={null}
       className={styles.detailModal}
+      centered
     >
       <div className={styles.noticeContent}>
         <Title level={4}>{record?.title}</Title>
