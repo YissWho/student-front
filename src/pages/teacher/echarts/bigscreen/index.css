@@ -104,14 +104,16 @@
 .bigscreen .content .center-panel .chart {
   flex: 1;
   width: 100%;
-  height: calc(100% - 33px);
+  height: calc(100% - 33px) !important;
+  min-height: 300px !important;
 }
 .bigscreen .content .left-panel .map,
 .bigscreen .content .right-panel .map,
 .bigscreen .content .center-panel .map {
   flex: 1;
   width: 100%;
-  height: calc(100% - 33px);
+  height: calc(100% - 33px) !important;
+  min-height: 300px !important;
 }
 .bigscreen .back-btn {
   position: fixed;

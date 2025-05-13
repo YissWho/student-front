@@ -6,8 +6,9 @@ import { ChartData } from "@/service/api";
  * @returns 
  */
 interface FetchChinaMapDataParams {
-    class_id: string;
+    class_id?: string;
 }
-export async function fetchChinaMapData(params: FetchChinaMapDataParams): Promise<ChartData> {
+export async function fetchChinaMapData(params?: FetchChinaMapDataParams): Promise<ChartData> {
+    console.log("发送地图数据请求，参数:", params);
     return request.get('/teacher/stats/province/map/', { params });
 }

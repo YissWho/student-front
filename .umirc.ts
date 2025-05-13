@@ -4,22 +4,25 @@ export default defineConfig({
   routes: [
     {
       path: "/",
-      redirect: "/login"
+      redirect: "/login",
     },
     {
       path: "/login",
       component: "student/login",
-      layout: false
+      layout: false,
+      name: "学生登录"
     },
     {
       path: "/student/register",
       component: "student/register",
-      layout: false
+      layout: false,
+      name: "学生注册"
     },
     {
       path: "/teacher/login",
       component: "teacher/login",
-      layout: false
+      layout: false,
+      name: "教师登录"
     },
     {
       path: "/teacher/echarts/bigscreen",
@@ -147,8 +150,10 @@ export default defineConfig({
     }
   ],
   npmClient: 'yarn',
+  esbuildMinifyIIFE: true,
   alias: {
-    '@': '/src'
+    '@': '/src',
+    '@assets': '/src/assets'
   },
   plugins: [
     '@umijs/plugins/dist/antd',
@@ -159,5 +164,7 @@ export default defineConfig({
     import: false
   },
   mfsu: false,
-  esbuildMinifyIIFE: true,
+  links: [{ rel: 'icon', href: '/favicon.ico' }],
+  title: "应届生去向管理系统",
+  publicPath: '/',
 });
