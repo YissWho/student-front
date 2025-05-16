@@ -145,7 +145,7 @@ const StudentFormModal: React.FC<StudentFormModalProps> = ({
           >
             <div className={styles.uploadButton}>
               <UploadOutlined />
-              <span>更换头像</span>
+              <span>{isEdit ? "更换头像" : "上传头像"}</span>
             </div>
           </Upload>
         </div>
